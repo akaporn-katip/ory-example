@@ -1,0 +1,34 @@
+services:
+  db:
+    container_name: postgresdb
+    image: postgres:16.1-bullseye
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: P@ssw0rd
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
+    networks:
+      - devops-network
+
+  kratos:
+    container_name: kratos
+    image: oryd/kratos:v25.4.0
+    volumes:
+      - ./kratos.yaml:/home/ory/kratos.yml
+    environment:
+      - DNS=postgres://postgres:P@ssw0rd@db:5432/kratosdb
+    command: ["serve", "--config", "/home/ory/kratos.yml"]
+    networks:
+      - devops-network
+
+    depends_on:
+      - db
+
+
+
+networks:
+  devops-network:
