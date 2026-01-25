@@ -2,10 +2,10 @@
 set -e
 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
-        create user devops with password 'P@ssw0rd';
+        create user dbuser with password 'P@ssw0rd';
 
         create database kratosdb;
-            grant all on database gitea to devops;
+            grant all on database kratosdb to dbuser;
             \\c kratosdb;
-                grant all on schema public to devops;
+                grant all on schema public to dbuser;
 EOSQL
