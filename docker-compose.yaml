@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: P@ssw0rd
     volumes:
       - ./data:/var/lib/postgresql/data
-      - ./init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
+      - ./init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh:rw
     networks:
       - orynet
 
@@ -40,8 +40,8 @@ services:
     container_name: kratos
     image: oryd/kratos:v25.4.0
     ports:
-      - 4433:4433
-      - 4434:4434
+      - 4433:4433 # public
+      - 4434:4434 # admin
     volumes:
       - ./kratos.yaml:/home/ory/kratos.yml
       - ./identity.default.schema.json:/etc/config/identity.default.schema.json

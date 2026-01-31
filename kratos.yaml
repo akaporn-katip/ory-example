@@ -2,7 +2,7 @@ dsn: "" # leave this empty
 
 serve:
   public:
-    base_url: http://127.0.0.1:4433/
+    base_url: http://localhost:4433/
     cors:
       enabled: true
       allowed_origins:
@@ -31,20 +31,20 @@ courier:
     connection_uri: smtps://test:test@mailslurper:1025/?skip_ssl_verify=true
     
 selfservice:
-  default_browser_return_url: http://127.0.0.1:4455/welcome
+  default_browser_return_url: http://localhost:4455/
   flows:
     login:
-      ui_url: http://127.0.0.1:4455/auth/login
+      ui_url: http://localhost:4455/auth/login
 
     registration:
-      ui_url: http://127.0.0.1:4455/auth/registration
+      ui_url: http://localhost:4455/auth/registration
 
     settings:
-      ui_url: http://127.0.0.1:4455/settings
+      ui_url: http://localhost:4455/settings
 
     error:
-      ui_url: http://127.0.0.1:4455/error
+      ui_url: http://localhost:4455/error
 
     recovery:
       enabled: true
-      ui_url: http://127.0.0.1:4455/auth/recovery
+      ui_url: http://localhost:4455/auth/recovery
